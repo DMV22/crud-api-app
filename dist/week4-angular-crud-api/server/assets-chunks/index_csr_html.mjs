@@ -1,0 +1,14 @@
+export default `<!doctype html>
+<html lang="en" data-beasties-container="">
+<head>
+  <meta charset="utf-8">
+  <title>Week2AngularCrudApi</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>:root{--color-primary:#3f51b5;--color-primary-hover:#364495;--color-secondary:#e0e0e0;--color-secondary-hover:#d5d5d5;--color-text:#212121;--color-text-secondary:#757575;--color-surface:#ffffff;--color-border:#e0e0e0;--color-error:#d32f2f;--color-success:#2e7d32;--color-warning:#ed6c02;--color-error-rgb:211, 47, 47;--color-success-rgb:46, 125, 50;--color-warning-rgb:237, 108, 2}</style><link rel="stylesheet" href="styles-DUTVRU2R.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-DUTVRU2R.css"></noscript></head>
+<body ngcm="">
+  <app-root></app-root>
+<link rel="modulepreload" href="chunk-LNUFMWG4.js"><script src="main-4LAHQVBJ.js" type="module"></script></body>
+</html>
+`;
