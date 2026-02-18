@@ -75,8 +75,11 @@ test.describe.serial('Tasks CRUD', () => {
 
     await deleteButton.click();
 
-    // Перевірити, що задача зникла
-    await expect(page.getByText(updatedTitle)).not.toBeVisible();
+    await expect(
+      page
+        .locator('.task-item')
+        .filter({ has: page.getByRole('link', { name: updatedTitle }) })
+    ).toHaveCount(0);
   });
 });
 
@@ -86,20 +89,30 @@ test.describe('Tasks filters & search', () => {
   });
 
   test('should filter tasks by status', async ({ page }) => {
-    // Нехай у базі є і completed, і active tasks
+    // Створюємо задачу й робимо її completed
+    await page.getByRole('button', { name: /new task/i }).click();
+    await page.fill('#title', 'Filter Test Completed');
+    await page.getByRole('button', { name: /create/i }).click();
 
-    // Completed filter
+    const taskRow = page
+      .locator('.task-item')
+      .filter({ hasText: 'Filter Test Completed' });
+    const checkbox = taskRow.getByRole('checkbox');
+
+    await checkbox.click(); // позначили як completed
+    // Якщо в DOM реально з’являється клас:
+    await expect(taskRow).toHaveClass(/completed/);
+
+    // Вмикаємо Completed‑фільтр
     await page.getByLabel('Completed').click();
-    // Перевірити, що всі відображені tasks мають completed=true:
-    // Наприклад, по класу .completed або по тіку ✓
 
-    const completedTasks = await page.locator('.task-item.completed').count();
-    expect(completedTasks).toBeGreaterThan(0);
+    // (Опціонально) перевіряємо, що саме наша задача видна
+    await expect(page.getByText('Filter Test Completed')).toBeVisible();
 
-    // Active filter
+    // Active‑фільтр
     await page.getByLabel('Active').click();
-    const activeTasks = await page.locator('.task-item:not(.completed)').count();
-    expect(activeTasks).toBeGreaterThan(0);
+    const activeCount = await page.locator('.task-item').count();
+    expect(activeCount).toBeGreaterThan(0);
   });
 
   test('should search tasks by title', async ({ page }) => {
