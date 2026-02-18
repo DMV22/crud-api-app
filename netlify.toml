@@ -1,6 +1,6 @@
 [build]
   command = "ng build --configuration production"
-  publish = "dist/<app-name>/browser"
+  publish = "dist/week4-angular-crud-api/browser"
 
 [[redirects]]
   from = "/*"
