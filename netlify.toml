@@ -1,0 +1,8 @@
+[build]
+  command = "ng build --configuration production"
+  publish = "dist/week4-angular-crud-api/browser"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

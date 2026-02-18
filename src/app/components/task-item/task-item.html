@@ -1,0 +1,24 @@
+<div class="task-item" [class.completed]="task().completed">
+  <div class="task-content">
+    <input type="checkbox" [checked]="task().completed" (change)="onToggle()" class="task-checkbox" />
+    <div class="task-details">
+      <a [routerLink]="['/tasks', task().id]" class="task-title" [class.completed]="task().completed">
+        {{ task().title }}
+      </a>
+      <p *ngIf="task().description" class="task-description">
+        {{ task().description }}
+      </p>
+      <span *ngIf="isOverdue()" class="badge-overdue">
+        Overdue
+      </span>
+    </div>
+  </div>
+  <div class="task-actions">
+    <button [routerLink]="['/tasks', task().id, 'edit']" class="btn btn-edit">
+      Edit
+    </button>
+    <button (click)="onDelete()" class="btn btn-delete">
+      Delete
+    </button>
+  </div>
+</div>

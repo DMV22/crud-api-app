@@ -1,0 +1,59 @@
+<div class="task-list-container">
+  <div class="task-list-header">
+    <h3>Tasks ({{ displayedTasksCount() }})</h3>
+    <button routerLink="/tasks/new" class="btn btn-primary">
+      + New Task
+    </button>
+  </div>
+
+  <div class="search-container">
+    <input type="text" [value]="searchQuery()" (input)="onSearchChange($event)" placeholder="Search tasks..."
+      autocomplete="off" />
+  </div>
+
+  <div *ngIf="errorMessage()" class="error-message">
+    {{ errorMessage() }}
+    <button (click)="loadTasks()" class="btn-retry">Retry</button>
+  </div>
+
+  <div class="filters">
+    <label>
+      <input type="radio" name="filter" (click)="onFilterChange('all')" [class.active]="filter() === 'all'" checked />
+      All
+    </label>
+    <label>
+      <input type="radio" name="filter" (click)="onFilterChange('active')" [class.active]="filter() === 'active'" />
+      Active
+    </label>
+    <label>
+      <input type="radio" name="filter" (click)="onFilterChange('completed')"
+        [class.active]="filter() === 'completed'" /> Completed
+    </label>
+  </div>
+
+  <div *ngIf="isLoading()" class="loading">
+    <p>Loading tasks...</p>
+  </div>
+
+
+  <cdk-virtual-scroll-viewport *ngIf="!isLoading() && !errorMessage() && displayedTasksCount() > 20" itemSize="80"
+    class="tasks-viewport">
+
+    <app-task-item *cdkVirtualFor="let task of displayedTasks(); trackBy: trackByTaskId" [task]="task"
+      (toggle)="onTaskToggle($event)" (delete)="onTaskDelete($event)">
+    </app-task-item>
+  </cdk-virtual-scroll-viewport>
+
+  <ul *ngIf="!isLoading() && !errorMessage() && displayedTasksCount() <= 20" class="task-list">
+    <app-task-item *ngFor="let task of displayedTasks(); trackBy: trackByTaskId" [task]="task"
+      (toggle)="onTaskToggle($event)" (delete)="onTaskDelete($event)">
+    </app-task-item>
+  </ul>
+
+  <div *ngIf="!isLoading() && !errorMessage() && displayedTasks().length === 0" class="empty-state">
+    <p>No tasks found.</p>
+    <button routerLink="/tasks/new" class="btn btn-primary">
+      Create your first task
+    </button>
+  </div>
+</div>
