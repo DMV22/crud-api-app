@@ -1,0 +1,41 @@
+{
+  "tasks": [
+    {
+      "id": "2",
+      "title": "Setup project",
+      "description": "Initialize Angular project with routing",
+      "completed": true,
+      "createdAt": "2026-01-26T08:30:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "Build CRUD",
+      "description": "Create full-stack task manager",
+      "completed": false,
+      "createdAt": "2026-01-27T09:15:00.000Z"
+    },
+    {
+      "id": "4",
+      "title": "Design UI",
+      "description": "Create basic layout with Angular Material",
+      "completed": true,
+      "createdAt": "2026-01-27T14:20:00.000Z"
+    },
+    {
+      "id": "5",
+      "title": "Add authentication",
+      "description": "Implement JWT-based authentication",
+      "completed": false,
+      "createdAt": "2026-01-28T10:00:00.000Z"
+    }
+  ],
+  "user": {
+    "id": "1",
+    "name": "Max",
+    "email": "max@example.com"
+  },
+  "settings": {
+    "theme": "light",
+    "notifications": true
+  }
+}

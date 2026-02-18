@@ -1,0 +1,43 @@
+<div class="task-form-container">
+  <h2>{{ isEditMode ? 'Edit Task' : 'Create New Task' }}</h2>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title *</label>
+      <input id="title" type="text" formControlName="title" placeholder="Enter task title"
+        [class.error]="title?.invalid && title?.touched" />
+      <div class="validation-errors" *ngIf="title?.invalid && title?.touched">
+        <span *ngIf="title?.errors?.['required']">Title is required</span>
+        <span *ngIf="title?.errors?.['minlength']">
+          Title must be at least 3 characters
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" placeholder="Enter task description (optional)"
+        rows="4"></textarea>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" formControlName="completed" />
+        Mark as completed
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid || isSubmitting">
+        {{ isSubmitting ? 'Saving...' : (isEditMode ? 'Update Task' : 'Create Task') }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="onCancel()" [disabled]="isSubmitting">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

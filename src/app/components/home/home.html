@@ -1,0 +1,37 @@
+<div class="home">
+  <div *ngIf="isLoading()" class="loading">
+    Loading...
+  </div>
+
+  <div *ngIf="!isLoading() && user">
+    <h2>Welcome, {{ user()!.name }}!</h2>
+    <p>Email: {{ user()!.email }}</p>
+    <p>Today is: {{ currentDate | date:'fullDate' }}</p>
+
+    <div class="stats">
+      <p>You have {{ tasksCount() }} tasks.</p>
+      <p>You have completed {{ completedCount() }} / {{ tasksCount() }}</p>
+      <p>Progress: {{ completionPercentage() }}%</p>
+    </div>
+
+    <div *ngIf="settings">
+      <p>Theme: {{ settings()!.theme }}</p>
+      <p>Notifications: {{ settings()!.notifications ? 'Enabled' : 'Disabled' }}</p>
+    </div>
+
+    <button (click)="goToTasks()">Go to Tasks</button>
+  </div>
+
+  <div *ngIf="errorMessage()" class="error">
+    {{ errorMessage() }}
+  </div>
+</div>
+
+<div class="auth-message" *ngIf="authMessage()">
+  {{ authMessage() }}
+</div>
+
+<div class="auth-actions">
+  <button *ngIf="!isLoggedIn" (click)="login()">Login</button>
+  <button class="btn-logout" *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+</div>

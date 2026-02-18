@@ -1,0 +1,66 @@
+<div class="task-detail-container">
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading task...</p>
+  </div>
+
+  <div *ngIf="errorMessage && !isLoading" class="error-message">
+    {{ errorMessage }}
+    <button (click)="goBack()" class="btn btn-primary">
+      Back to Tasks
+    </button>
+  </div>
+
+  <div *ngIf="task && !isLoading" class="task-detail">
+    <div class="task-header">
+      <h2>Task Details</h2>
+      <div class="task-actions">
+        <button [routerLink]="['/tasks', task.id, 'edit']" class="btn btn-edit">
+          Edit
+        </button>
+        <button (click)="deleteTask()" class="btn btn-delete">
+          Delete
+        </button>
+      </div>
+    </div>
+
+    <div class="task-info">
+      <div class="info-group">
+        <label>Title:</label>
+        <p class="task-title" [class.completed]="task.completed">
+          {{ task.title }}
+        </p>
+      </div>
+
+      <div class="info-group" *ngIf="task.description">
+        <label>Description:</label>
+        <p class="task-description">{{ task.description }}</p>
+      </div>
+
+      <div class="info-group">
+        <label>Status:</label>
+        <span class="status-badge" [class.completed]="task.completed">
+          {{ task.completed ? 'Completed' : 'Active' }}
+        </span>
+      </div>
+
+      <div class="info-group" *ngIf="task.createdAt">
+        <label>Created:</label>
+        <p>{{ task.createdAt | date:'medium' }}</p>
+      </div>
+
+      <div class="info-group">
+        <label>ID:</label>
+        <p class="task-id">{{ task.id }}</p>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button (click)="toggleTask()" class="btn btn-primary">
+        {{ task.completed ? 'Mark as Active' : 'Mark as Completed' }}
+      </button>
+      <button (click)="goBack()" class="btn btn-secondary">
+        Back to Tasks
+      </button>
+    </div>
+  </div>
+</div>

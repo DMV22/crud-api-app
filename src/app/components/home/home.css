@@ -1,0 +1,92 @@
+.home {
+  max-width: 700px;
+  margin: 60px auto 40px;
+  padding: 32px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.home h2 {
+  margin-bottom: 16px;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.home p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+
+.home p:nth-of-type(2),
+.home p:nth-of-type(3) {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.home button {
+  margin-top: 24px;
+  padding: 10px 20px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.home button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* ===== Auth buttons ===== */
+
+.auth-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.auth-actions button {
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.auth-actions button:not(.btn-logout) {
+  background-color: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.auth-actions button:not(.btn-logout):hover {
+  background-color: var(--color-secondary-hover);
+}
+
+.btn-logout {
+  background-color: rgba(var(--color-error-rgb), 0.1);
+  color: var(--color-error);
+}
+
+.btn-logout:hover {
+  background-color: rgba(var(--color-error-rgb), 0.2);
+}
+
+.auth-message {
+  margin: 12px 0;
+  padding: 10px 14px;
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  border-radius: 6px;
+  font-size: 14px;
+}
