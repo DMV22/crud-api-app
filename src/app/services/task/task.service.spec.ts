@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TaskService, Task } from './task.service';
+import { environment } from '../../../environments/environments.prod';
+
 
 describe('TaskService', () => {
   let service: TaskService;
@@ -45,7 +47,7 @@ describe('TaskService', () => {
   describe('getTasks', () => {
     it('should return tasks from API', (done) => {
       // Arrange
-      const expectedUrl = 'http://localhost:3000/tasks';
+      const expectedUrl = `${environment.apiUrl}/tasks`;
 
       // Act
       service.getTasks().subscribe({
@@ -74,7 +76,7 @@ describe('TaskService', () => {
         }
       });
 
-      const req = httpMock.expectOne('http://localhost:3000/tasks');
+      const req = httpMock.expectOne(`${environment.apiUrl}/tasks`);
       req.error(new ProgressEvent('Network error'), { status: 500 });
     });
   });
@@ -92,7 +94,7 @@ describe('TaskService', () => {
         }
       });
 
-      const req = httpMock.expectOne(`http://localhost:3000/tasks/${taskId}`);
+      const req = httpMock.expectOne(`${environment.apiUrl}/tasks/${taskId}`);
       expect(req.request.method).toBe('GET');
       req.flush(expectedTask);
     });
@@ -107,7 +109,7 @@ describe('TaskService', () => {
     //     }
     //   });
 
-    //   const req = httpMock.expectOne(`http://localhost:3000/tasks/${taskId}`);
+    //   const req = httpMock.expectOne(`${environment.apiUrl}/tasks/${taskId}`);
     //   req.error(new ProgressEvent('Not found'), { status: 404 });
     // });
   });
@@ -135,7 +137,7 @@ describe('TaskService', () => {
         }
       });
 
-      const req = httpMock.expectOne('http://localhost:3000/tasks');
+      const req = httpMock.expectOne(`${environment.apiUrl}/tasks`);
       expect(req.request.method).toBe('POST');
       expect(req.request.body.title).toBe(newTask.title);
       req.flush(createdTask);
@@ -156,7 +158,7 @@ describe('TaskService', () => {
         }
       });
 
-      const req = httpMock.expectOne(`http://localhost:3000/tasks/${taskId}`);
+      const req = httpMock.expectOne(`${environment.apiUrl}/tasks/${taskId}`);
       expect(req.request.method).toBe('PATCH');
       expect(req.request.body).toEqual(updates);
       req.flush(updatedTask);
@@ -174,7 +176,7 @@ describe('TaskService', () => {
         }
       });
 
-      const req = httpMock.expectOne(`http://localhost:3000/tasks/${taskId}`);
+      const req = httpMock.expectOne(`${environment.apiUrl}/tasks/${taskId}`);
       expect(req.request.method).toBe('DELETE');
       req.flush(null);
     });
@@ -192,7 +194,7 @@ describe('TaskService', () => {
         }
       });
 
-      const req = httpMock.expectOne(`http://localhost:3000/tasks/${taskId}`);
+      const req = httpMock.expectOne(`${environment.apiUrl}/tasks/${taskId}`);
       expect(req.request.method).toBe('PATCH');
       expect(req.request.body).toEqual({ completed });
       req.flush({ ...mockTasks[0], completed });
@@ -202,7 +204,7 @@ describe('TaskService', () => {
   describe('searchTasks', () => {
     it('should search tasks by query', (done) => {
       const query = 'Test';
-      const expectedUrl = `http://localhost:3000/tasks?q=${query}`;
+      const expectedUrl = `${environment.apiUrl}/tasks?q=${query}`;
 
       service.searchTasks(query).subscribe({
         next: (tasks) => {

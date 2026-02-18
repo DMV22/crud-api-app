@@ -12,5 +12,5 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  title = 'Week 2 Angular';
+  title = 'Week 4 Angular';
 }

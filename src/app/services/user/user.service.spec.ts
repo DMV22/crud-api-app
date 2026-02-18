@@ -1,8 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { UserService, User } from './user.service';
+import { environment } from '../../../environments/environments.prod';
 
-describe('Userervice', () => {
+describe('UserService', () => {
   let service: UserService;
   let httpMock: HttpTestingController;
 
@@ -39,7 +40,7 @@ describe('Userervice', () => {
   describe('getUser', () => {
     it('should return user from API', (done) => {
       // Arrange
-      const expectedUrl = 'http://localhost:3000/user';
+      const expectedUrl = `${environment.apiUrl}/user`;
 
       // Act
       service.getUser().subscribe({
@@ -71,7 +72,7 @@ describe('Userervice', () => {
         }
       });
 
-      const req = httpMock.expectOne('http://localhost:3000/user');
+      const req = httpMock.expectOne(`${environment.apiUrl}/user`);
       req.error(new ProgressEvent('Network error'), { status: 500 });
     });
   });
@@ -79,7 +80,7 @@ describe('Userervice', () => {
   describe('getSettings', () => {
     it('should return settings from API', (done) => {
       // Arrange
-      const expectedUrl = 'http://localhost:3000/settings';
+      const expectedUrl = `${environment.apiUrl}/settings`;
 
       // Act
       service.getSettings().subscribe({
@@ -112,7 +113,7 @@ describe('Userervice', () => {
         }
       });
 
-      const req = httpMock.expectOne('http://localhost:3000/settings');
+      const req = httpMock.expectOne(`${environment.apiUrl}/settings`);
       req.error(new ProgressEvent('Network error'), { status: 500 });
     });
   });

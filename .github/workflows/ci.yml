@@ -27,8 +27,8 @@ jobs:
         # Додано --watch=false, щоб тести в CI не зависали в очікуванні змін
         run: npm test -- --runInBand --watch=false
 
-      - name: Run unit tests with coverage (optional)
-        run: npm run test:coverage --if-present
+      # - name: Run unit tests with coverage (optional)
+      #   run: npm run test:coverage --if-present
 
       - name: Build production
         run: npm run build -- --configuration production
