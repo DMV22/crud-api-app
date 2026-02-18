@@ -6,7 +6,8 @@ export default defineConfig({
   expect: {
     timeout: 5_000
   },
-  fullyParallel: true,
+  fullyParallel: false, // Змініть на false
+  workers: 1,           // Запускайте в один потік у CI
   webServer: {
     command: 'npm run start',
     port: 4200,
